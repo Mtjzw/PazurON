@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "pazuron",
+  "compatibility_date": "2026-06-25",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "strona"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
