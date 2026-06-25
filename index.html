@@ -8,32 +8,1010 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
-			/* === CURSOR GLOW === */
-			#cursor-glow {
-				position: fixed;
-				width: 320px;
-				height: 320px;
-				border-radius: 50%;
-				background: radial-gradient(circle, rgba(200,160,120,0.13) 0%, transparent 70%);
-				pointer-events: none;
-				transform: translate(-50%, -50%);
-				transition: opacity 0.3s;
-				z-index: 9999;
-				mix-blend-mode: screen;
+			/* ============================================================
+			   CURSOR — desktop only
+			   ============================================================ */
+			#cursor-glow, #cursor-dot { display: none; }
+			@media (pointer: fine) {
+				#cursor-glow {
+					display: block;
+					position: fixed;
+					width: 380px; height: 380px;
+					border-radius: 50%;
+					background: radial-gradient(circle, rgba(210,165,120,0.14) 0%, transparent 68%);
+					pointer-events: none;
+					transform: translate(-50%,-50%);
+					z-index: 9999;
+					mix-blend-mode: screen;
+					will-change: left, top;
+				}
+				#cursor-dot {
+					display: block;
+					position: fixed;
+					width: 9px; height: 9px;
+					border-radius: 50%;
+					background: rgba(220,185,150,0.9);
+					pointer-events: none;
+					transform: translate(-50%,-50%);
+					z-index: 10000;
+					transition: transform 0.12s cubic-bezier(0.34,1.56,0.64,1), background 0.2s, width 0.2s, height 0.2s;
+					box-shadow: 0 0 14px 4px rgba(220,185,150,0.45);
+				}
+				#cursor-dot.hover {
+					width: 40px; height: 40px;
+					background: rgba(255,200,140,0.18);
+					border: 1px solid rgba(255,200,140,0.55);
+					box-shadow: 0 0 20px 6px rgba(220,185,150,0.3);
+				}
 			}
-			#cursor-dot {
+
+			/* ============================================================
+			   WEBGL CANVAS — full-screen shader background
+			   ============================================================ */
+			#gl-canvas {
 				position: fixed;
-				width: 8px;
-				height: 8px;
-				border-radius: 50%;
-				background: rgba(220,185,150,0.85);
+				top: 0; left: 0;
+				width: 100%; height: 100%;
 				pointer-events: none;
-				transform: translate(-50%, -50%);
-				z-index: 10000;
-				transition: transform 0.1s, background 0.2s;
-				box-shadow: 0 0 12px 4px rgba(220,185,150,0.5);
+				z-index: 0;
+				opacity: 0.38;
 			}
-			body:not(.is-article-visible) #cursor-dot {
+
+			/* ============================================================
+			   PARTICLES canvas — reduced on mobile
+			   ============================================================ */
+			#particles-canvas {
+				position: fixed;
+				top: 0; left: 0;
+				width: 100%; height: 100%;
+				pointer-events: none;
+				z-index: 1;
+				opacity: 0.5;
+			}
+
+			/* ============================================================
+			   LOGO 3D TILT
+			   ============================================================ */
+			#header .logo {
+				transition: transform 0.12s ease-out;
+				transform-style: preserve-3d;
+				will-change: transform;
+				cursor: default;
+			}
+			#header .logo span {
+				display: inline-block;
+				transition: transform 0.65s cubic-bezier(0.34,1.56,0.64,1);
+			}
+			#header .logo:hover span {
+				transform: rotate(180deg) scale(1.18);
+			}
+
+			/* ============================================================
+			   NAV RIPPLE + MAGNETIC
+			   ============================================================ */
+			#header nav ul li a {
+				position: relative;
+				overflow: hidden;
+				display: inline-block;
+				transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), color 0.2s;
+			}
+			#header nav ul li a .ripple {
+				position: absolute;
+				border-radius: 50%;
+				background: rgba(255,255,255,0.22);
+				transform: scale(0);
+				animation: rippleAnim 0.6s linear;
+				pointer-events: none;
+			}
+			@keyframes rippleAnim { to { transform: scale(5); opacity: 0; } }
+
+			#header nav ul li a::after {
+				content: '';
+				position: absolute;
+				bottom: -2px; left: 50%;
+				width: 0; height: 1px;
+				background: rgba(255,215,160,0.7);
+				transition: width 0.35s ease, left 0.35s ease;
+			}
+			#header nav ul li a:hover::after {
+				width: 100%; left: 0;
+			}
+
+			/* ============================================================
+			   H1 SHIMMER
+			   ============================================================ */
+			#header .inner h1 {
+				background: linear-gradient(90deg,
+					#fff 0%, #fff 30%,
+					rgba(255,225,175,1) 50%,
+					#fff 70%, #fff 100%);
+				background-size: 220% auto;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+				animation: shimmerText 5s linear infinite;
+			}
+			@keyframes shimmerText {
+				from { background-position: 220% center; }
+				to   { background-position: -220% center; }
+			}
+
+			/* ============================================================
+			   ARTICLE REVEAL
+			   ============================================================ */
+			#main article {
+				animation: articleReveal 0.6s cubic-bezier(0.23,1,0.32,1) both;
+			}
+			@keyframes articleReveal {
+				from { opacity:0; transform: translateY(32px) scale(0.97); filter: blur(5px); }
+				to   { opacity:1; transform: translateY(0)   scale(1);    filter: blur(0); }
+			}
+
+			/* ============================================================
+			   IMAGE — parallax container
+			   ============================================================ */
+			.image.main {
+				overflow: hidden;
+				border-radius: 6px;
+			}
+			.image.main img {
+				will-change: transform;
+				transform: scale(1.06);
+				transition: transform 0.08s linear;
+			}
+
+			/* ============================================================
+			   SCROLL-REVEAL: sekcje wjeżdżają z dołu
+			   ============================================================ */
+			.sr-item {
+				opacity: 0;
+				transform: translateY(30px);
+				transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.23,1,0.32,1);
+			}
+			.sr-item.sr-visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			/* ============================================================
+			   LISTA USŁUG — staggered reveal
+			   ============================================================ */
+			.lista-uslug li {
+				opacity: 0;
+				transform: translateX(-20px);
+				transition: opacity 0.42s ease, transform 0.42s ease;
+			}
+			.lista-uslug li.visible {
+				opacity: 1;
+				transform: translateX(0);
+			}
+
+			/* ============================================================
+			   KATEGORIA HOVER GLOW
+			   ============================================================ */
+			.kategoria-rytualow {
+				transition: box-shadow 0.3s ease;
+				border-radius: 8px;
+				padding: 0.5rem 0;
+			}
+			.kategoria-rytualow:hover {
+				box-shadow: 0 0 35px rgba(200,160,100,0.09);
+			}
+
+			/* ============================================================
+			   MAGNETIC BUTTONS — wrapper needed for effect
+			   ============================================================ */
+			.mag-wrap {
+				display: inline-block;
+				position: relative;
+			}
+			input[type="submit"].primary,
+			input[type="reset"] {
+				transition: box-shadow 0.3s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+				position: relative;
+				overflow: hidden;
+			}
+			input[type="submit"].primary:active { transform: scale(0.97); }
+
+			/* ============================================================
+			   TEXT SCRAMBLE — stosowany przez JS
+			   ============================================================ */
+			.scramble-target { display: inline; }
+
+			/* ============================================================
+			   SCROLL MORPHING — płynne przejście kategorii
+			   ============================================================ */
+			.kategoria-rytualow {
+				transition: box-shadow 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
+			}
+			.kategoria-rytualow.morph-out {
+				opacity: 0.35;
+				transform: scale(0.97) translateY(-8px);
+			}
+			.kategoria-rytualow.morph-in {
+				opacity: 1;
+				transform: scale(1) translateY(0);
+			}
+
+			/* ============================================================
+			   FOOTER ICONS
+			   ============================================================ */
+			#footer .icons li a {
+				transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), color 0.25s;
+				display: inline-block;
+			}
+			#footer .icons li a:hover  { transform: translateY(-6px) scale(1.2); }
+			#footer .icons li a:active { transform: scale(0.95); }
+
+			/* ============================================================
+			   TAP SPLASH canvas
+			   ============================================================ */
+			#splash-canvas {
+				position: fixed;
+				top: 0; left: 0;
+				width: 100%; height: 100%;
+				pointer-events: none;
+				z-index: 9998;
+			}
+
+			/* ============================================================
+			   GYRO INDICATOR (mobile only)
+			   ============================================================ */
+			#gyro-hint {
+				display: none;
+				position: fixed;
+				bottom: 1.2rem; left: 50%;
+				transform: translateX(-50%);
+				background: rgba(255,210,155,0.12);
+				border: 1px solid rgba(255,210,155,0.3);
+				border-radius: 2rem;
+				padding: 0.4rem 1rem;
+				font-size: 0.7rem;
+				color: rgba(255,255,255,0.6);
+				pointer-events: none;
+				z-index: 9997;
+				letter-spacing: 0.08em;
+				backdrop-filter: blur(6px);
+				animation: fadeHint 3s ease 1.5s both;
+			}
+			@keyframes fadeHint {
+				0%   { opacity:0; transform: translateX(-50%) translateY(8px); }
+				20%  { opacity:1; transform: translateX(-50%) translateY(0); }
+				80%  { opacity:1; }
+				100% { opacity:0; }
+			}
+			@media (pointer: coarse) {
+				#gyro-hint { display: block; }
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Cursor effects (desktop) -->
+		<div id="cursor-glow"></div>
+		<div id="cursor-dot"></div>
+
+		<!-- WebGL shader background -->
+		<canvas id="gl-canvas"></canvas>
+
+		<!-- Particles canvas -->
+		<canvas id="particles-canvas"></canvas>
+
+		<!-- Tap splash canvas (mobile) -->
+		<canvas id="splash-canvas"></canvas>
+
+		<!-- Gyro hint (mobile) -->
+		<div id="gyro-hint">✦ nakieruj telefon</div>
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<div class="logo" id="logo-tilt">
+					<span class="icon solid fa-yin-yang"></span>
+				</div>
+				<div class="content">
+					<div class="inner">
+						<h1>Pazur On, Zmarszczka Off</h1>
+						<p>Odmładzanie twarzy bez igieł i botoksu w centrum Poznania! <br>Głęboki relaks głowy w luźnej atmosferze. Poczuj, jak schodzi z Ciebie cały dzień.</p>
+					</div>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="#intro">Filozofia</a></li>
+						<li><a href="#work">Jak działam</a></li>
+						<li><a href="#about">Menu rytuałów</a></li>
+						<li><a href="#contact">Umów się</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Main -->
+			<div id="main">
+
+				<!-- O Mnie -->
+				<article id="intro">
+					<h2 class="major">Filozofia</h2>
+					<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
+					<p>Wierzymy w rzemiosło, nie w chemię.</p>
+					<p>Współczesny świat proponuje zamrażanie mimiki i sterylne gabinety. Ja wybrałam inną drogę, zakorzenioną w soft minimaliźmie. Tworzę przestrzeń, gdzie uwalniam napięcia skumulowane w mięśniach twarzy i karku. Niektórzy nazywają to neurokosmetyką, czyli poszukiwaniem ukojenia dla przebodźcowanego układu nerwowego poprzez zabiegi self-care. Wiem, że skóra i układ nerwowy to jedność i nie walczę z upływającym czasem – za pomocą autorskich masaży i naturalnej kosmetologii przywracam skórze jej naturalną zdolność do regeneracji, blasku i uniesienia rysów. Twoja twarz nie potrzebuje korekty. Potrzebuje uwagi.</p>
+				</article>
+
+				<!-- Sprzęt -->
+				<article id="work">
+					<h2 class="major">Jak działam</h2>
+					<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+					<p><b>0.&nbsp;&nbsp;Reset sensoryczny: </b>Wchodzisz, zostawiasz hałas miasta za drzwiami. Zaczynamy od wyciszenia zmysłów w ciepłym, miękkim świetle, filiżanki kawy / herbaty i krótkiej rozmowy o potrzebach Twojej skóry i samopoczuciu.</p>
+					<p><b>1.&nbsp;&nbsp;Głęboka przebudowa (Twarz &amp; Głowa): </b>Bez igieł i skalpela. Intensywne techniki manualne docierają do głębokich warstw mięśniowych. Rzeźbimy owal twarzy, niwelujemy obrzęki i uwalniamy stres schowany w żwaczach i skroniach.</p>
+					<p><b>2.&nbsp;&nbsp;Dopełnienie (Dłonie &amp; Stopy): </b>Dopełnieniem relaksu jest precyzyjny, minimalistyczny manicure i pedicure. Dbamy o detale w atmosferze, która pozwala Ci po prostu na godzinę zniknąć dla świata.</p>
+				</article>
+
+				<!-- Usługi -->
+				<article id="about">
+					<h2 class="major">Menu rytuałów</h2>
+					<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
+
+					<section class="menu-rytualow">
+
+						<div class="kategoria-rytualow">
+							<h2 class="naglowek-kategorii">Twarz &amp; Głowa <span class="podpis-kategorii">(Rytuały odmładzające i relaksacyjne)</span></h2>
+							<ul class="lista-uslug">
+								<li><strong>Zabiegi ujędrniające, liftingujące i anti-aging</strong><p>Naturalna architektura twarzy bez użycia igieł. Za pomocą intensywnej stymulacji manualnej i biologicznie czynnych składników pobudzamy skórę do produkcji własnego kolagenu, przywracając jej młodzieńczą sprężystość i naturalnie uniesiony owal.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Zabiegi nawilżające i odżywcze</strong><p>Głęboki kompres ratunkowy dla skóry spragnionej regeneracji. Rytuał nasyca komórki skoncentrowaną wilgocią, odbudowuje barierę ochronną i natychmiastowo przywraca twarzy wypoczęty, pełen blasku wygląd.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Zabiegi przeciwtrądzikowe</strong><p>Wyważona terapia, która wycisza stany zapalne, reguluje pracę skóry i przywraca jej utraconą równowagę. Działamy bez agresywnego złuszczania, skupiając się na ukojeniu, regeneracji i długofalowym zdrowiu cery.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Oczyszczanie manualne</strong><p>Tradycyjne, niezwykle precyzyjne rzemiosło pielęgnacyjne wykonywane z najwyższą delikatnością. Polega na ręcznym, głębokim uwolnieniu porów od zanieczyszczeń, co natychmiast odświeża skórę i pozwala jej na nowo swobodnie oddychać.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Masaże twarzy</strong><p>Manualny trening mięśni twarzy połączony z głębokim relaksem. Intensywne, rytmiczne ruchy rzeźbią rysy, niwelują obrzęki limfatyczne i uwalniają chroniczne napięcia stresowe, dając natychmiastowy efekt naturalnego liftingu.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Masaże głowy</strong><p>Absolutny reset dla przebodźcowanego układu nerwowego. Poprzez precyzyjną stymulację punktów uciskowych na skalpie uwalniamy nagromadzony stres, poprawiamy mikrokrążenie i wprowadzamy umysł w stan głębokiej, medytacyjnej ciszy.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Masaże dekoltu i karku</strong><p>Rytuał zdejmujący ciężar codzienności z Twoich ramion. Skupia się na rozluźnieniu spiętych mięśni obręczy barkowej i szyi, co nie tylko przynosi fizyczną ulgę, ale też poprawia przepływ krwi i potęguje blask skóry na twarzy.</p><p class="price"><strong>cena: ---</strong></p></li>
+							</ul>
+						</div>
+
+						<div class="kategoria-rytualow">
+							<h2 class="naglowek-kategorii">Kosmetologia Aparaturowa <span class="podpis-kategorii">(Naturalne wsparcie technologiczne)</span></h2>
+							<ul class="lista-uslug">
+								<li><strong>Kawitacja</strong><p>Bezdotykowe i całkowicie bezbolesne odświeżenie skóry za pomocą fali ultradźwiękowej. Mikroskopijne pęcherzyki delikatnie i skutecznie złuszczają martwy naskórek, pozostawiając cerę idealnie gładką i przygotowaną na przyjęcie składników odżywczych.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Sonoforeza</strong><p>Wprowadzanie drogocennych koktajli witaminowych w głębokie warstwy skóry za pomocą subtelnych mikrodrgań ultradźwiękowych. To bezinwazyjny sposób na maksymalne odżywienie i rozświetlenie cery od wewnątrz.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Oksybrazja</strong><p>Intensywny, chłodny powiew czystego odświeżenia. Zabieg polega na złuszczaniu naskórka za pomocą rozproszonego strumienia soli fizjologicznej i tlenu, co błyskawicznie dotlenia cerę, zmniejsza pory i daje spektakularny efekt rozjaśnienia.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Oczyszczanie wodorowe</strong><p>Wykorzystanie mikroskopijnych cząsteczek aktywnego wodoru do bezinwazyjnego wymiatania wolnych rodników i głębokich zanieczyszczeń. Zabieg skutecznie oczyszcza pory na poziomie komórkowym, hamując procesy starzenia i odświeżając zmęczoną skórę.</p><p class="price"><strong>cena: ---</strong></p></li>
+							</ul>
+						</div>
+
+						<div class="kategoria-rytualow">
+							<h2 class="naglowek-kategorii">Oprawa Oka &amp; Depilacja</h2>
+							<ul class="lista-uslug">
+								<li><strong>Henna brwi i rzęs z regulacją</strong><p>Subtelna, naturalna stylizacja, która podkreśla głębię spojrzenia i definiuje architekturę twarzy. Geometryczna regulacja i dopasowany do Twojej urody kolor dają efekt schludnej elegancji bez konieczności codziennego makijażu.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Depilacja woskowa</strong><p>Klasyczna metoda na długotrwałe cieszenie się aksamitnie gładką skórą. Szybkie i precyzyjne usunięcie włosków wraz z cebulkami gwarantuje spokój na wiele tygodni i sprawia, że odrastające włoski są znacznie cieńsze i delikatniejsze.</p><p class="price"><strong>cena: ---</strong></p></li>
+							</ul>
+						</div>
+
+						<div class="kategoria-rytualow">
+							<h2 class="naglowek-kategorii">Makijaż <span class="podpis-kategorii">(Podkreślenie naturalnego piękna)</span></h2>
+							<ul class="lista-uslug">
+								<li><strong>Makijaż ślubny</strong><p>Tradycyjny, niezwykle świetlisty makijaż skrojony na miarę najważniejszego dnia w życiu. Łączy w sobie elegancję, odporność na emocje i idealną współpracę z obiektywem aparatu, eksponując Twoje najpiękniejsze rysy twarzy.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Makijaż wieczorowy</strong><p>Zmysłowa stylizacja dedykowana na wyjątkowe wyjścia. Dobieramy intensywność i charakter makijażu do klimatu wydarzenia, Twojej kreacji oraz światła, w jakim będziesz się prezentować, abyś czuła się pewnie i zjawiskowo.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Makijaż do sesji fotograficznych</strong><p>Specjalistyczna technika makijażu oparta na zaawansowanym modelowaniu światłocieniem. Tworzymy perfekcyjną, matowo-satynową strukturę skóry, która wygląda nieskazitelnie w wymagającym oświetleniu studyjnym i plenerowym.</p><p class="price"><strong>cena: ---</strong></p></li>
+							</ul>
+						</div>
+
+						<div class="kategoria-rytualow">
+							<h2 class="naglowek-kategorii">Manicure &amp; Pedicure <span class="podpis-kategorii">(Minimalizm i detal w rytmie slow)</span></h2>
+							<ul class="lista-uslug">
+								<li><strong>Manicure klasyczny</strong><p>Tradycyjna, minimalistyczna pielęgnacja skupiona na zdrowiu i naturalnej estetyce dłoni. Obejmuje precyzyjne opracowanie skórek, nadanie idealnego kształtu paznokciom oraz odżywczą kąpiel i masaż dłoni.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Manicure japoński</strong><p>Rytuał głębokiej regeneracji dla zmęczonych i kruchych paznokci. Polega na wtarciu w płytkę odżywczej pasty z krzemionką z Morza Japońskiego i pyłkiem pszczelim, co nadaje im zdrowy, różowy połysk o sile czystego diamentu.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Manicure hybrydowy</strong><p>Połączenie nienagannej estetyki z bezkompromisową trwałością. Cienka, idealnie gładka warstwa elastycznego lakieru utwardzanego światłem chroni paznokcie i gwarantuje perfekcyjny kolor oraz blask nawet do trzech tygodni.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Manicure akrylo-żelowy</strong><p>Zaawansowana technika dedykowana wymagającej lub osłabionej płytce. Pozwala na bezpieczne utwardzenie, nadbudowanie lub przedłużenie paznokcia, dając naturalnie wyglądający, maksymalnie trwały i odporny na uszkodzenia efekt.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Pedicure klasyczny</strong><p>Przynoszący ulgę rytuał pielęgnacyjny, który przywraca stopom lekkość i nienaganny wygląd. Składa się z odświeżającej kąpieli, wygładzenia naskórka, precyzyjnego skrócenia paznokci oraz głęboko nawilżającego masażu.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Pedicure frezarkowy</strong><p>Nowoczesna i niezwykle bezpieczna pielęgnacja stóp przy użyciu specjalistycznego sprzętu. Pozwala na bezwysiłkowe, idealnie gładkie usunięcie zrogowaciałego naskórka z podeszwy stóp oraz perfekcyjne opracowanie wałów okołopaznokciowych.</p><p class="price"><strong>cena: ---</strong></p></li>
+								<li><strong>Pedicure hybrydowy</strong><p>Kompleksowy zabieg pielęgnacji stóp zwieńczony nałożeniem odpornego na ścieranie lakieru hybrydowego. To idealne rozwiązanie na letnie miesiące lub urlop, gwarantujące nienaganny blask i kolor bez odprysków przez wiele tygodni.</p><p class="price"><strong>cena: ---</strong></p></li>
+							</ul>
+						</div>
+
+					</section>
+				</article>
+
+				<!-- Contact -->
+				<article id="contact">
+					<h2 class="major">Umów się</h2>
+
+					<form id="contactForm" method="post" action="https://formsubmit.co/pazuronzmarszczkaoff@gmail.com">
+						<input type="hidden" name="_subject" value="PazurON - Nowa wiadomość ze strony!">
+						<input type="hidden" name="_captcha" value="false">
+						<div class="fields">
+							<div class="field half">
+								<label for="imie">Imię</label>
+								<input type="text" name="Imie" id="imie" required
+									oninvalid="this.setCustomValidity('Proszę podać swoje imię.')"
+									oninput="this.setCustomValidity('')" />
+							</div>
+							<div class="field half">
+								<label for="kontakt">Numer telefonu lub email</label>
+								<input type="text" name="Kontakt" id="kontakt" required
+									oninvalid="this.setCustomValidity('To pole jest obowiązkowe! Podaj numer telefonu lub e-mail, abym mogła się z Tobą skontaktować.')"
+									oninput="this.setCustomValidity('')" />
+							</div>
+							<div class="field">
+								<label for="wiadomosc">Napisz jaki termin i jaka usługa Cię interesuje</label>
+								<textarea name="Wiadomosc" id="wiadomosc" rows="4" required
+									oninvalid="this.setCustomValidity('Proszę wpisać wiadomość.')"
+									oninput="this.setCustomValidity('')"></textarea>
+							</div>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Wyślij" class="primary" /></li>
+							<li><input type="reset" value="Resetuj" /></li>
+						</ul>
+					</form>
+
+					<div id="successMessage" style="display:none;text-align:center;padding:2rem;border:1px solid #ffffff;border-radius:4px;background:rgba(255,255,255,0.05);">
+						<h3 style="margin-bottom:0.5rem;color:#ffffff;letter-spacing:0.1rem;">Wiadomość wysłana!</h3>
+						<p style="margin-bottom:0;">Dziękuję za kontakt. Odezwię się do Ciebie najszybciej, jak to możliwe.</p>
+					</div>
+
+					<ul class="icons" style="margin-top:2rem;">
+						<li><a href="https://booksy.com/pl-pl/dl/show-business/ID_TWOJEGO_SALONU" class="icon solid fa-calendar-alt" target="_blank"><span class="label">Booksy</span></a></li>
+						<li><a href="https://facebook.com/profile.php?id=61590422836386" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com/pazuron.zmarszczkaoff/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
+						<li><a href="https://tiktok.com/@zmarszczkaoff" class="icon brands fa-tiktok" target="_blank"><span class="label">Tik-Tok</span></a></li>
+					</ul>
+				</article>
+
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons" style="margin-bottom:1.5rem;">
+					<li><a href="https://booksy.com/pl-pl/dl/show-business/ID_TWOJEGO_SALONU" class="icon solid fa-calendar-alt" target="_blank"><span class="label">Booksy</span></a></li>
+					<li><a href="https://facebook.com/profile.php?id=61590422836386" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
+					<li><a href="https://www.instagram.com/pazuron.zmarszczkaoff/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
+					<li><a href="https://tiktok.com/@zmarszczkaoff" class="icon brands fa-tiktok" target="_blank"><span class="label">Tik-Tok</span></a></li>
+				</ul>
+
+				<section style="max-width:800px;margin:50px auto;text-align:center;">
+					<div style="margin-top:20px;">
+						<iframe
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d608.2897717551277!2d16.87125312855821!3d52.42191509824495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470445abb13e3f1f%3A0x5130fde482d8ac94!2sPazur%20On%20Zmarszczka%20Off!5e0!3m2!1spl!2spl!4v1782388899674!5m2!1spl!2spl"
+							style="width:100%;height:400px;border:0;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.15);"
+							allowfullscreen=""
+							loading="lazy"
+							referrerpolicy="strict-origin-when-cross-origin">
+						</iframe>
+						<h5>Spokojnie i komfortowo zaparkujesz na darmowym parkingu przed samym salonem!</h5>
+					</div>
+				</section>
+
+				<p class="copyright">&copy; 2026. Design: <a href="mailto:mat.jazwiec@gmail.com">MatJazz</a>.</p>
+			</footer>
+
+		</div>
+
+		<!-- BG -->
+		<div id="bg"></div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<!-- WOW Effects v3 -->
+		<script>
+		(function(){
+		'use strict';
+
+		/* ============================================================
+		   UTILS
+		   ============================================================ */
+		var RM   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		var isMobile = window.matchMedia('(pointer: coarse)').matches;
+		var W = window.innerWidth, H = window.innerHeight;
+		window.addEventListener('resize', function(){ W = window.innerWidth; H = window.innerHeight; });
+
+		/* ============================================================
+		   1. WEBGL SHADER BACKGROUND
+		      Płynna, organiczna animacja reagująca na mysz/gyro
+		   ============================================================ */
+		(function(){
+			if (RM) return;
+			var canvas = document.getElementById('gl-canvas');
+			var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+			if (!gl) { canvas.style.display='none'; return; }
+
+			var ux = 0.5, uy = 0.5; // normalised mouse / gyro target
+			var sx = 0.5, sy = 0.5; // smoothed
+
+			var VS = 'attribute vec2 p; void main(){ gl_Position=vec4(p,0,1); }';
+			var FS = [
+				'precision mediump float;',
+				'uniform float t;',
+				'uniform vec2 u;',
+				'uniform vec2 res;',
+				'void main(){',
+				'  vec2 uv = gl_FragCoord.xy / res;',
+				'  float d = distance(uv, u);',
+				'  float wave = sin(uv.x*6.0 + t*0.55 + uv.y*4.0)*0.5+0.5;',
+				'  float wave2= sin(uv.y*5.0 - t*0.4 + uv.x*3.5)*0.5+0.5;',
+				'  float glow = 0.18 / (d + 0.35);',
+				'  vec3 col = mix(vec3(0.08,0.05,0.02), vec3(0.28,0.18,0.08), wave*wave2);',
+				'  col += vec3(0.32,0.18,0.06) * glow * 0.55;',
+				'  gl_FragColor = vec4(col, 1.0);',
+				'}'
+			].join('\n');
+
+			function mkShader(type, src){
+				var s = gl.createShader(type);
+				gl.shaderSource(s, src); gl.compileShader(s); return s;
+			}
+			var prog = gl.createProgram();
+			gl.attachShader(prog, mkShader(gl.VERTEX_SHADER, VS));
+			gl.attachShader(prog, mkShader(gl.FRAGMENT_SHADER, FS));
+			gl.linkProgram(prog); gl.useProgram(prog);
+
+			var buf = gl.createBuffer();
+			gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+			var pLoc = gl.getAttribLocation(prog,'p');
+			gl.enableVertexAttribArray(pLoc);
+			gl.vertexAttribPointer(pLoc,2,gl.FLOAT,false,0,0);
+
+			var uT   = gl.getUniformLocation(prog,'t');
+			var uU   = gl.getUniformLocation(prog,'u');
+			var uRes = gl.getUniformLocation(prog,'res');
+
+			function resize(){
+				canvas.width  = window.innerWidth;
+				canvas.height = window.innerHeight;
+				gl.viewport(0,0,canvas.width,canvas.height);
+			}
+			window.addEventListener('resize', resize); resize();
+
+			var t0 = performance.now();
+			function draw(ts){
+				var t = (ts - t0) * 0.001;
+				sx += (ux - sx) * 0.04;
+				sy += (uy - sy) * 0.04;
+				gl.uniform1f(uT, t);
+				gl.uniform2f(uU, sx, 1.0 - sy);
+				gl.uniform2f(uRes, canvas.width, canvas.height);
+				gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+				requestAnimationFrame(draw);
+			}
+			requestAnimationFrame(draw);
+
+			// Desktop: mouse drives shader
+			document.addEventListener('mousemove', function(e){
+				ux = e.clientX / W;
+				uy = e.clientY / H;
+			});
+
+			// Mobile: gyroscope drives shader (also used for logo tilt)
+			window.addEventListener('deviceorientation', function(e){
+				if (e.beta===null) return;
+				ux = Math.min(1, Math.max(0, (e.gamma + 45) / 90));
+				uy = Math.min(1, Math.max(0, (e.beta  - 10) / 70));
+			});
+		})();
+
+		/* ============================================================
+		   2. PARTICLES — adaptive (fewer on mobile, no repel on touch)
+		   ============================================================ */
+		(function(){
+			if (RM) return;
+			var canvas = document.getElementById('particles-canvas');
+			var ctx    = canvas.getContext('2d');
+			var COUNT  = isMobile ? 28 : 55;
+			var rmx = W/2, rmy = H/2;
+			var particles = [];
+
+			function resize(){ canvas.width = W; canvas.height = H; }
+			window.addEventListener('resize', resize); resize();
+
+			function P(){ this.reset(true); }
+			P.prototype.reset = function(scatter){
+				this.x     = Math.random() * W;
+				this.y     = scatter ? Math.random() * H : H + 5;
+				this.r     = Math.random() * 1.7 + 0.4;
+				this.vx    = (Math.random()-0.5) * 0.22;
+				this.vy    = -(Math.random() * 0.32 + 0.08);
+				this.life  = Math.random();
+				this.decay = Math.random() * 0.011 + 0.003;
+				this.phase = Math.random() * Math.PI * 2;
+			};
+			P.prototype.step = function(){
+				this.x += this.vx + Math.sin(this.phase + Date.now()*0.0005)*0.15;
+				this.y += this.vy;
+				this.life -= this.decay;
+				if (!isMobile){
+					var dx=this.x-rmx, dy=this.y-rmy, d=Math.sqrt(dx*dx+dy*dy);
+					if(d<90){ var f=(90-d)/90; this.x+=(dx/d)*f*1.1; this.y+=(dy/d)*f*1.1; }
+				}
+				if(this.life<=0||this.y<-8) this.reset(false);
+			};
+			for(var i=0;i<COUNT;i++) particles.push(new P());
+
+			if(!isMobile){
+				document.addEventListener('mousemove',function(e){ rmx=e.clientX; rmy=e.clientY; });
+			}
+
+			function draw(){
+				ctx.clearRect(0,0,W,H);
+				for(var i=0;i<particles.length;i++){
+					var p=particles[i];
+					p.step();
+					var a=Math.max(0,Math.min(1,p.life*2.5));
+					ctx.beginPath();
+					ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+					ctx.fillStyle='rgba(220,185,140,'+(a*0.68)+')';
+					ctx.fill();
+				}
+				requestAnimationFrame(draw);
+			}
+			draw();
+		})();
+
+		/* ============================================================
+		   3. TAP SPLASH — mobile touch creates burst of particles
+		   ============================================================ */
+		(function(){
+			var canvas = document.getElementById('splash-canvas');
+			var ctx    = canvas.getContext('2d');
+			var bursts = [];
+
+			function resize(){ canvas.width=W; canvas.height=H; }
+			window.addEventListener('resize',resize); resize();
+
+			function Burst(x,y){
+				this.particles=[];
+				for(var i=0;i<22;i++){
+					var angle = Math.random()*Math.PI*2;
+					var speed = Math.random()*3.5+1;
+					this.particles.push({
+						x:x, y:y,
+						vx: Math.cos(angle)*speed,
+						vy: Math.sin(angle)*speed,
+						r:  Math.random()*2.8+1,
+						life:1
+					});
+				}
+			}
+			Burst.prototype.step=function(){
+				var alive=false;
+				this.particles.forEach(function(p){
+					p.x+=p.vx; p.y+=p.vy;
+					p.vy+=0.06; // gravity
+					p.vx*=0.96; p.vy*=0.96;
+					p.life-=0.032;
+					if(p.life>0) alive=true;
+				});
+				return alive;
+			};
+			Burst.prototype.draw=function(ctx){
+				this.particles.forEach(function(p){
+					if(p.life<=0) return;
+					ctx.beginPath();
+					ctx.arc(p.x,p.y,p.r*p.life,0,Math.PI*2);
+					ctx.fillStyle='rgba(255,200,130,'+(p.life*0.85)+')';
+					ctx.fill();
+				});
+			};
+
+			document.addEventListener('touchstart',function(e){
+				if(RM) return;
+				for(var i=0;i<e.changedTouches.length;i++){
+					var t=e.changedTouches[i];
+					bursts.push(new Burst(t.clientX,t.clientY));
+				}
+			},{passive:true});
+
+			// Also on mouse click for desktop
+			document.addEventListener('click',function(e){
+				if(RM||isMobile) return;
+				bursts.push(new Burst(e.clientX,e.clientY));
+			});
+
+			function draw(){
+				ctx.clearRect(0,0,W,H);
+				bursts=bursts.filter(function(b){
+					var alive=b.step();
+					b.draw(ctx);
+					return alive;
+				});
+				requestAnimationFrame(draw);
+			}
+			draw();
+		})();
+
+		/* ============================================================
+		   4. CURSOR GLOW + DOT — desktop only
+		   ============================================================ */
+		(function(){
+			if(RM||isMobile) return;
+			var glow=document.getElementById('cursor-glow');
+			var dot =document.getElementById('cursor-dot');
+			var mx=-999,my=-999,gx=-999,gy=-999;
+
+			document.addEventListener('mousemove',function(e){
+				mx=e.clientX; my=e.clientY;
+				dot.style.left=mx+'px'; dot.style.top=my+'px';
+			});
+			(function animGlow(){
+				gx+=(mx-gx)*0.07; gy+=(my-gy)*0.07;
+				glow.style.left=gx+'px'; glow.style.top=gy+'px';
+				requestAnimationFrame(animGlow);
+			})();
+
+			document.querySelectorAll('a,input[type="submit"],input[type="reset"],button').forEach(function(el){
+				el.addEventListener('mouseenter',function(){ dot.classList.add('hover'); });
+				el.addEventListener('mouseleave',function(){ dot.classList.remove('hover'); });
+			});
+		})();
+
+		/* ============================================================
+		   5. LOGO 3D TILT
+		      Desktop: mouse position | Mobile: gyroscope
+		   ============================================================ */
+		(function(){
+			if(RM) return;
+			var logo=document.getElementById('logo-tilt');
+			if(!logo) return;
+
+			// Desktop
+			if(!isMobile){
+				document.addEventListener('mousemove',function(e){
+					var r=logo.getBoundingClientRect();
+					var dx=(e.clientX-(r.left+r.width/2))/W;
+					var dy=(e.clientY-(r.top +r.height/2))/H;
+					logo.style.transform='perspective(280px) rotateY('+(dx*26)+'deg) rotateX('+(-dy*26)+'deg) scale(1.1)';
+				});
+			}
+			// Mobile: gyro
+			var gyroBeta=0, gyroGamma=0;
+			window.addEventListener('deviceorientation',function(e){
+				if(e.beta===null) return;
+				gyroBeta  = Math.max(-25,Math.min(25, e.beta  - 30));
+				gyroGamma = Math.max(-25,Math.min(25, e.gamma));
+				logo.style.transform='perspective(280px) rotateX('+(gyroBeta*0.6)+'deg) rotateY('+(gyroGamma*0.6)+'deg) scale(1.08)';
+			});
+		})();
+
+		/* ============================================================
+		   6. MAGNETIC BUTTONS — desktop only
+		      Przyciski przyciągają kursor z odległości 80px
+		   ============================================================ */
+		(function(){
+			if(RM||isMobile) return;
+			var RANGE=80, STRENGTH=0.38;
+			document.querySelectorAll('#header nav ul li a, input[type="submit"], input[type="reset"]').forEach(function(el){
+				el.addEventListener('mousemove',function(e){
+					var r=el.getBoundingClientRect();
+					var cx=r.left+r.width/2, cy=r.top+r.height/2;
+					var dx=e.clientX-cx, dy=e.clientY-cy;
+					var dist=Math.sqrt(dx*dx+dy*dy);
+					if(dist<RANGE){
+						el.style.transform='translate('+(dx*STRENGTH)+'px,'+(dy*STRENGTH)+'px)';
+					}
+				});
+				el.addEventListener('mouseleave',function(){
+					el.style.transform='translate(0,0)';
+					el.style.transition='transform 0.45s cubic-bezier(0.34,1.56,0.64,1)';
+					setTimeout(function(){ el.style.transition=''; },450);
+				});
+			});
+		})();
+
+		/* ============================================================
+		   7. TEXT SCRAMBLE — hover na nagłówkach kategorii
+		   ============================================================ */
+		(function(){
+			if(RM) return;
+			var CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
+			var PL   ='ĄĆĘŁŃÓŚŹŻąćęłńóśźż ';
+
+			function scramble(el){
+				var orig=el.dataset.orig || el.textContent;
+				el.dataset.orig=orig;
+				var frames=0, maxFrames=orig.length*2;
+				var iter=0;
+				clearInterval(el._sci);
+				el._sci=setInterval(function(){
+					el.textContent=orig.split('').map(function(c,i){
+						if(PL.indexOf(c)>=0||c===' ') return c;
+						if(i<iter) return orig[i];
+						return CHARS[Math.floor(Math.random()*CHARS.length)];
+					}).join('');
+					if(frames%2===0) iter++;
+					frames++;
+					if(iter>=orig.length){ clearInterval(el._sci); el.textContent=orig; }
+				},35);
+			}
+
+			document.querySelectorAll('.naglowek-kategorii').forEach(function(el){
+				// store just the text node, not the span subtitle
+				var mainText=el.childNodes[0];
+				if(!mainText||mainText.nodeType!==3) return;
+				el.addEventListener('mouseenter',function(){
+					var orig=mainText.textContent;
+					var frames=0, iter=0;
+					clearInterval(el._sci);
+					el._sci=setInterval(function(){
+						mainText.textContent=orig.split('').map(function(c,i){
+							if(PL.indexOf(c)>=0||c===' ') return c;
+							if(i<iter) return orig[i];
+							return CHARS[Math.floor(Math.random()*CHARS.length)];
+						}).join('');
+						if(frames%2===0) iter++;
+						frames++;
+						if(iter>=orig.length){ clearInterval(el._sci); mainText.textContent=orig; }
+					},38);
+				});
+			});
+
+			// Also on H2.major when article opens
+			document.addEventListener('click',function(){
+				setTimeout(function(){
+					document.querySelectorAll('#main article:not([style*="display: none"]) h2.major').forEach(function(el){
+						if(el._scrambled) return;
+						el._scrambled=true;
+						scramble(el);
+						setTimeout(function(){ el._scrambled=false; },3000);
+					});
+				},120);
+			});
+		})();
+
+		/* ============================================================
+		   8. SCROLL-DRIVEN MORPHING — kategorie wjeżdżają sekwencyjnie
+		   ============================================================ */
+		(function(){
+			if(RM) return;
+			var io=new IntersectionObserver(function(entries){
+				entries.forEach(function(e){
+					if(e.isIntersecting){
+						e.target.classList.remove('morph-out');
+						e.target.classList.add('morph-in','sr-visible');
+					} else {
+						e.target.classList.remove('morph-in');
+						e.target.classList.add('morph-out');
+					}
+				});
+			},{threshold:0.15, rootMargin:'0px 0px -60px 0px'});
+
+			document.querySelectorAll('.kategoria-rytualow').forEach(function(el,i){
+				el.style.transitionDelay=(i*0.07)+'s';
+				io.observe(el);
+			});
+
+			// Generic scroll-reveal for other elements
+			var ioSR=new IntersectionObserver(function(entries){
+				entries.forEach(function(e){
+					if(e.isIntersecting){ e.target.classList.add('sr-visible'); ioSR.unobserve(e.target); }
+				});
+			},{threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+
+			document.querySelectorAll('#main article p, #main article h2').forEach(function(el){
+				el.classList.add('sr-item');
+				ioSR.observe(el);
+			});
+		})();
+
+		/* ============================================================
+		   9. STAGGER REVEAL — lista usług
+		   ============================================================ */
+		(function(){
+			if(RM) return;
+			var io=new IntersectionObserver(function(entries){
+				entries.forEach(function(e){
+					if(e.isIntersecting){
+						var lis=e.target.querySelectorAll('li:not(.visible)');
+						lis.forEach(function(li,i){
+							setTimeout(function(){ li.classList.add('visible'); },i*55);
+						});
+						io.unobserve(e.target);
+					}
+				});
+			},{threshold:0.05});
+			document.querySelectorAll('.lista-uslug').forEach(function(ul){ io.observe(ul); });
+
+			// Also re-trigger on article open
+			document.addEventListener('click',function(){
+				setTimeout(function(){
+					document.querySelectorAll('.lista-uslug').forEach(function(ul){
+						var rect=ul.getBoundingClientRect();
+						if(rect.top<H-40){
+							ul.querySelectorAll('li:not(.visible)').forEach(function(li,i){
+								setTimeout(function(){ li.classList.add('visible'); },i*55);
+							});
+						}
+					});
+				},420);
+			});
+		})();
+
+		/* ============================================================
+		   10. NAV RIPPLE
+		   ============================================================ */
+		document.querySelectorAll('#header nav ul li a').forEach(function(link){
+			link.addEventListener('click',function(e){
+				var ripple=document.createElement('span');
+				ripple.classList.add('ripple');
+				var r=link.getBoundingClientRect();
+				var sz=Math.max(r.width,r.height)*1.6;
+				ripple.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(e.clientX-r.left-sz/2)+'px;top:'+(e.clientY-r.top-sz/2)+'px;';
+				link.appendChild(ripple);
+				setTimeout(function(){ ripple.remove(); },650);
+			});
+		});
+
+		/* ============================================================
+		   11. IMAGE PARALLAX — mouse on desktop, gyro on mobile
+		   ============================================================ */
+		(function(){
+			if(RM) return;
+			var px=0,py=0;
+			if(!isMobile){
+				document.addEventListener('mousemove',function(e){
+					px=(e.clientX/W-0.5)*16;
+					py=(e.clientY/H-0.5)*16;
+					document.querySelectorAll('#main .image.main img').forEach(function(img){
+						img.style.transform='translate('+px+'px,'+py+'px) scale(1.06)';
+					});
+				});
+			} else {
+				window.addEventListener('deviceorientation',function(e){
+					if(e.gamma===null) return;
+					px=Math.max(-12,Math.min(12,e.gamma*0.3));
+					py=Math.max(-8, Math.min(8, (e.beta-30)*0.18));
+					document.querySelectorAll('#main .image.main img').forEach(function(img){
+						img.style.transform='translate('+px+'px,'+py+'px) scale(1.06)';
+					});
+				});
+			}
+		})();
+
+		/* ============================================================
+		   12. CONTACT FORM AJAX
+		   ============================================================ */
+		(function(){
+			var form=document.getElementById('contactForm');
+			if(!form) return;
+			form.addEventListener('submit',function(e){
+				e.preventDefault();
+				var btn=form.querySelector('input[type="submit"]');
+				btn.value='Wysyłanie…'; btn.disabled=true;
+				fetch('https://formsubmit.co/ajax/pazuronzmarszczkaoff@gmail.com',{
+					method:'POST',
+					headers:{'Content-Type':'application/json','Accept':'application/json'},
+					body:JSON.stringify({
+						Imie:     document.getElementById('imie').value,
+						Kontakt:  document.getElementById('kontakt').value,
+						Wiadomosc:document.getElementById('wiadomosc').value,
+						_subject: 'PazurON - Nowa wiadomość ze strony!',
+						_captcha: 'false'
+					})
+				})
+				.then(function(r){ return r.json(); })
+				.then(function(d){
+					if(d.success==='true'||d.success===true){
+						form.style.display='none';
+						document.getElementById('successMessage').style.display='block';
+					} else {
+						alert('Wystąpił problem. Spróbuj ponownie.');
+						btn.value='Wyślij'; btn.disabled=false;
+					}
+				})
+				.catch(function(){
+					alert('Błąd połączenia. Sprawdź internet.');
+					btn.value='Wyślij'; btn.disabled=false;
+				});
+			});
+		})();
+
+		})();
+		</script>
+
+	</body>
+</html>
 				background: rgba(255,220,180,0.9);
 			}
 
