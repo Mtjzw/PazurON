@@ -164,6 +164,13 @@
 				transition: transform 0.08s linear;
 			}
 
+			/* Menu rytuałów: nieruchomy obraz bez efektu drżenia */
+			#about .image.main img {
+				transform: scale(1.06) !important;
+				transition: none;
+				will-change: auto;
+			}
+
 			/* ============================================================
 			   SCROLL-REVEAL: sekcje wjeżdżają z dołu
 			   ============================================================ */
@@ -228,13 +235,10 @@
 			.kategoria-rytualow {
 				transition: box-shadow 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
 			}
-			.kategoria-rytualow.morph-out {
-				opacity: 0.35;
-				transform: scale(0.97) translateY(-8px);
-			}
+			.kategoria-rytualow.morph-out,
 			.kategoria-rytualow.morph-in {
 				opacity: 1;
-				transform: scale(1) translateY(0);
+				transform: none;
 			}
 
 			/* ============================================================
@@ -358,58 +362,172 @@
 
 					<section class="menu-rytualow">
 
+						
+
 						<div class="kategoria-rytualow">
-							<h2 class="naglowek-kategorii">Twarz & Głowa <span class="podpis-kategorii">(Rytuały odmładzające i relaksacyjne)</span></h2>
+							<h2 class="naglowek-kategorii">Kosmetologia twarzy</h2>
 							<ul class="lista-uslug">
-								<li><strong>Zabiegi ujędrniające, liftingujące i anti-aging</strong><p>Naturalna architektura twarzy bez użycia igieł. Za pomocą intensywnej stymulacji manualnej i biologicznie czynnych składników pobudzamy skórę do produkcji własnego kolagenu, przywracając jej młodzieńczą sprężystość i naturalnie uniesiony owal.</p><p class="price"><strong>cena: od 180 zł</strong></p></li>
-								<li><strong>Zabiegi nawilżające i odżywcze</strong><p>Głęboki kompres ratunkowy dla skóry spragnionej regeneracji. Rytuał nasyca komórki skoncentrowaną wilgocią, odbudowuje barierę ochronną i natychmiastowo przywraca twarzy wypoczęty, pełen blasku wygląd.</p><p class="price"><strong>cena: od 180 zł</strong></p></li>
-								<li><strong>Zabiegi przeciwtrądzikowe</strong><p>Wyważona terapia, która wycisza stany zapalne, reguluje pracę skóry i przywraca jej utraconą równowagę. Działamy bez agresywnego złuszczania, skupiając się na ukojeniu, regeneracji i długofalowym zdrowiu cery.</p><p class="price"><strong>cena: od 180 zł</strong></p></li>
+								<li><strong>Kawitacja (maska gratis)</strong><p>Bezdotykowe i całkowicie bezbolesne odświeżenie skóry za pomocą fali ultradźwiękowej. Mikroskopijne pęcherzyki delikatnie i skutecznie złuszczają martwy naskórek, pozostawiając cerę idealnie gładką i przygotowaną na przyjęcie składników odżywczych.</p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 100 zł</strong></p></li>
+								<li><strong>Sonoforeza z  ampułką Jeu Derm (maska gratis)</strong><p>Wprowadzanie drogocennych koktajli witaminowych w głębokie warstwy skóry za pomocą subtelnych mikrodrgań ultradźwiękowych. To bezinwazyjny sposób na maksymalne odżywienie i rozświetlenie cery od wewnątrz.</p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 160 zł</strong></p></li>
+								<li><strong>Oksybrazja (maska gratis)</strong><p>Intensywny, chłodny powiew czystego odświeżenia. Zabieg polega na złuszczaniu naskórka za pomocą rozproszonego strumienia soli fizjologicznej i tlenu, co błyskawicznie dotlenia cerę, zmniejsza pory i daje spektakularny efekt rozjaśnienia.</p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 120 zł</strong></p></li>
+								<li><strong>Infuzja tlenowa z ampułką Jeu Derm (maska gratis)</strong><p> Dzięki temu zawarte w ampułce skoncentrowane peptydy, komórki   macierzyste i kwas hialuronowy natychmiastowo nasycają komórki, dając spektakularny efekt liftingu, głębokiego nawodnienia i promiennego blasku.</p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 160 zł</strong></p></li>
+								<li><strong>Oczyszczanie wodorowe (maska gratis)</strong><p>Wykorzystanie mikroskopijnych cząsteczek aktywnego wodoru do bezinwazyjnego wymiatania wolnych rodników i głębokich zanieczyszczeń. Zabieg skutecznie oczyszcza pory na poziomie komórkowym, hamując procesy starzenia i odświeżając zmęczoną skórę.</p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 180 zł</strong></p></li>
+								<li><strong>Oksybrazja + infuzja tlenowa (maska gratis)</strong><p></p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 220 zł</strong></p></li>
+								<li><strong>Masaż liftingujący twarz, szyja, dekolt </strong><p></p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 170 zł</strong></p></li>
+								<li><strong>Masaż liftingujący twarz, szyja, dekolt, głowa </strong><p></p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 190 zł</strong></p></li>
+								</ul></div>
 
-								<li><strong>Masaż twarzy, głowy i karku</strong><p>Manualny trening mięśni twarzy połączony z głębokim relaksem. Intensywne, rytmiczne ruchy rzeźbią rysy, niwelują obrzęki limfatyczne i uwalniają chroniczne napięcia stresowe, dając natychmiastowy efekt naturalnego liftingu.</p><p class="price"><strong>cena: od 180 zł</strong></p></li>
+<br>
+						<div class="kategoria-rytualow">
+							<h3 class="naglowek-kategorii">Rytuały esencjonalne & bankietowe</h3>
+							<p>60-minutowe dermo-kuracje łączące zaawansowane technologie z głębokim odprężeniem. Idealny wybór na regularną dbałość o kondycję skóry oraz natychmiastowe przywrócenie jej blasku.</p>
+							<br>
+							<ul class="lista-uslug">							
+							
+								<li><strong>⚡ Ultradźwiękowe Odświeżenie (Kawitacja + Maska + Masaż)</strong><p>    * Działanie: Bezbolesne usunięcie zrogowaciałego naskórka za pomocą fal ultradźwiękowych, silne nawilżenie cery. 
+	<br>* Przebieg: Demakijaż, peeling kawitacyjny, maska głęboko nawilżająca oraz masaż manualny karku i głowy.</p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 180 zł</strong></p></li>
+								<li><strong>✨ MedMelano „Glass Skin” Rytuał Bankietowy</strong><p>    * Działanie: Sensoryczny zabieg przed ważnym wyjściem, przywracający cerze nieskazitelny, szklany blask i głębokie nawodnienie komórkowe.
+    <br>* Przebieg: Demakijaż, tonizacja esencją probiotyczną, maska, oraz głęboko odprężający masaż manualny twarzy, głowy i karku.</p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 230 zł</strong></p></li>
+								<li><strong>🌪️ H₂O Hydro Detox BASIC (Oczyszczanie Wodorowe + Maska + Masaż)</strong><p>    * Działanie: Dogłębne oczyszczenie porów z zaskórników, redukcja nadmiaru sebum oraz natychmiastowe ukojenie, wyciszenie i odświeżenie skóry.
+    <br>* Przebieg: Demakijaż, zmiękczenie naskórka żelem Sebo Xtractor, peeling wodorowy (oczyszczanie pod ciśnieniem), maska oraz relaksujący masaż głowy i karku.</p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 260 zł</strong></p></li>
+							
+								</ul></div>
 
 
+	<br>
+						<div class="kategoria-rytualow">
+							<h3 class="naglowek-kategorii">👑 Ekskluzywne Rytuały Łączone PREMIUM</h3>
+							<p>Najwyższy poziom dermo-pielęgnacji. Zaawansowane technologie aparaturowe połączone z luksusowymi formułami i głębokim relaksem.</p>
+							<br>
+							
+							<ul class="lista-uslug">							
+
+								<li><strong>💨 Oxygen & Glow Infusion</strong><p>    * Działanie: Silna rewitalizacja antyoksydacyjna, dotlenienie komórkowe i natychmiastowa redukcja oznak zmęczenia.
+    <br>* Przebieg: Demakijaż, infuzja tlenowa z koncentratem MedMelano, maska witaminowa oraz masaż manualny twarzy, karku i głowy.</p><p class="price"><strong>⏱️ czas: 70 min.<br>cena: 250 zł</strong></p></li>
+								<li><strong>🌪️ H₂O Hydro Detox & Probiotyk </strong><p>    * Działanie: Bezkompromisowe oczyszczenie porów, neutralizacja wolnych rodników i głęboka odbudowa barierowa skóry.
+    <br>* Przebieg: Demakijaż, oczyszczanie wodorowe, wtłaczanie serum z kompleksem AstaCICA™, łagodząca maska probiotyczna MedMelano, wyciszająca głowica chłodząca oraz masaż głowy i karku.</p><p class="price"><strong>⏱️ czas: 85 min.<br>cena: 390 zł</strong></p></li>
+								<li><strong>🧬 JeuDerm Peptydowy Lift RF</strong><p>    * Działanie: Zagęszczenie i ujędrnienie wiotkiej cery, nieinwazyjne uniesienie owalu twarzy.
+    <br>* Przebieg: Demakijaż, peeling kawitacyjny, stymulacja kolagenu głowicą fal radiowych RF na ampułce neuropeptydowej, kultowa maska napinająca z jadem żmii Lift Intense Viso Contour oraz masaż liftingujący twarzy, karku i głowy.</p><p class="price"><strong>⏱️ czas: 90 min.<br>cena: 450 zł</strong></p></li>
+								<li><strong>👑 Królewski Rytuał Reform Age</strong><p>    * Działanie: Silne prasowanie zmarszczek i całkowity reset psychofizyczny.
+    <br>* Przebieg: Demakijaż, oksybrazja, infuzja tlenowa ampułką Jeu Derm, luksusowa maska biocelulozowa, kojąca głowica chłodząca oraz pełen autorski masaż liftingujący twarzy, karku i głowy.</p><p class="price"><strong>⏱️ czas: 100 min.<br>cena: 390 zł</strong></p></li>
+								<li><strong>✨ Szyty na miarę – Autorski Rytuał Indywidualny – Cena dobierana na miejscu</strong><p>    * Działanie: Idealne rozwiązanie, jeśli nie wiesz, czego aktualnie potrzebuje Twoja skóra.
+    <br>* Przebieg: Rytuał rozpoczynamy od szczegółowej, profesjonalnej analizy stanu skóry oraz wywiadu. Na tej podstawie indywidualnie komponuję dla Ciebie zabieg, łącząc zaawansowane składniki aktywne MedMelano lub JeuDerm oraz technologie hi-tech, idealnie dopasowane do aktualnych potrzeb Twojej cery.</p><p class="price"><strong>cena: od 250 zł</strong></p></li>
+
+<br><p>👩‍⚕️Przed każdym zabiegiem przeprowadzam bezpłatną konsultację i badanie skóry. Na miejscu wspólnie dobieramy idealne technologie i składniki aktywne dopasowane do aktualnych potrzeb Twojej cery.
+</p><br><br>
+
+							</ul></div>
+
+
+						<div class="kategoria-rytualow">
+							<h3 class="naglowek-kategorii">👁️ Oprawa oka</h3>
+							<p>Subtelne podkreślenie naturalnego spojrzenia.</p>							
+							<ul class="lista-uslug">																
+
+								<li><strong>Henna pudrowa / żelowa brwi z regulacją </strong><p></p><p class="price"><strong>cena: 60 zł</strong></p></li>
+								<li><strong>Henna żelowa rzęs</strong><p></p><p class="price"><strong>cena: 40 zł</strong></p></li>
+								<li><strong>Regulacja brwi (pęseta / wosk)</strong><p></p><p class="price"><strong>cena: 35 zł</strong></p></li>
+								<li><strong>Komplet (Henna brwi, rzęs + regulacja)</strong><p></p><p class="price"><strong>cena: 95 zł</strong></p></li>
+								
+							</ul>
+						</div>
+<br>
+
+						<div class="kategoria-rytualow">
+							<h2 class="naglowek-kategorii">💅 Kosmetologia paznokci</h2><br>
+						<div class="kategoria-rytualow">
+							<h3 class="naglowek-kategorii">✨ Stylizacja dłonis</h3>
+							<p>Trwałe stylizacje wykonywane w najwyższym standardzie higieny i bezpieczeństwa.</p>
+							
+							</div>
+							<ul class="lista-uslug">
+								<li><strong>Manicure pielęgnacyjny (opracowanie skórek i płytki + odywka)</strong><p></p><p class="price"><strong>⏱️ czas: 45 min.<br>cena: 70 zł</strong></p></li>
+								<li><strong>Manicure klasyczny (jednolity kolor, lakier tradycyjny)</strong><p></p><p class="price"><strong>⏱️ czas: 60 min.<br>cena: 80 zł</strong></p></li>
+								<li><strong>Manicure klasyczny FRENCH (lakier tradycyjny)</strong><p></p><p class="price"><strong>⏱️ czas: 75 min.<br>cena: 95 zł</strong></p></li>
+								<li><strong>Manicure japoński (naturalne odżywienie i lustrzany blask)</strong><p></p><p class="price"><strong>⏱️ czas: 50 min.<br>cena: 100 zł</strong></p></li>
+								<li><strong>Manicure hybrydowy (jednolity kolor) </strong><p></p><p class="price"><strong>⏱️ czas: 80 min.<br>cena: 130 zł</strong></p></li>
+								<li><strong>Manicure hybrydowy FRENCH</strong><p></p><p class="price"><strong>⏱️ czas: 95 min.<br>cena: 145 zł</strong></p></li>
+								<li><strong>Przedłużanie paznokci akrylożelem (do 2 cm) </strong><p></p><p class="price"><strong>⏱️ czas: 105 min.<br>cena: 180 zł</strong></p></li>
+								<li><strong>Uzupełnienie (cena uzależniona od wielkości odrostu)</strong><p></p><p class="price"><strong>⏱️ czas: 90-105 min.<br>cena: 140-170 zł</strong></p></li>
+								<br>
+
+								<p>Usługi dodatkowe:</p>
+
+								<li><strong>Usunięcie stylizacji hybrydowej/żelowej</strong><p></p><p class="price"><strong>cena: 20-50 zł</strong></p></li>
+								<li><strong>Usunięcie klasycznego lakieru przed zabiegiem</strong><p></p><p class="price"><strong>cena: 10 zł</strong></p></li>
+								<li><strong>Usunięcie stylizacji wykonanej w moim salonie</strong><p></p><p class="price"><strong>cena: BEZPŁATNIE (przy kolejnej pełnej usłudze)</strong></p></li>
+
+								</ul></div>
+								<br>
+
+
+	
+						<div class="kategoria-rytualow">
+							<h3 class="naglowek-kategorii">👣 Pielęgnacja Stóp</h3>
+							<p>Estetyka paznokci połączona z nowoczesnym i bezpiecznym opracowaniem podeszwy stóp.</p>
+							<ul class="lista-uslug">							
+								<li><strong>Pedicure klasyczny</strong><p>    * Kąpiel, opracowanie podeszwy stóp i pięt medyczną metodą Pododisc . Malowanie odżywką paznokci gratis ! </p><p class="price"><strong>⏱️ czas: 90 min.<br>cena: 130 zł</strong></p></li>
+								<li><strong>Pedicure klasyczny z malowaniem lakierem tradycyjnym</strong><p>    * Kąpiel, opracowanie podeszwy stóp i pięt medyczną metodą Pododisc + lakier tradycyjny.</p><p class="price"><strong>⏱️ czas: 90 min.<br>cena: 150 zł</strong></p></li>
+								<li><strong>Pedicure klasyczny FRENCH</strong><p>    * Kąpiel, opracowanie stóp metodą Pododisc + french tradycyjny.</p><p class="price"><strong>⏱️ czas: 105 min.<br>cena: 165 zł</strong></p></li>
+								<li><strong>Pedicure hybrydowy</strong><p>    * Kąpiel, opracowanie stóp metodą Pododisc + kolor hybrydowy.</p><p class="price"><strong>⏱️ czas: 90 min.<br>cena: 180 zł</strong></p></li>
+								<li><strong>Pedicure hybrydowy FRENCH</strong><p>    * Kąpiel, opracowanie stóp metodą Pododisc + french hybrydowy.</p><p class="price"><strong>⏱️ czas: 105 min.<br>cena: 195 zł</strong></p></li>
+
+						</ul></div>
+
+
+						<div class="kategoria-rytualow">
+							<h2 class="naglowek-kategorii">🪶 Jedwabista gładkość | Depilacja systemem WAXX.ME </h2> <p>Niezwykle komfortowe i bezbolesne usuwanie owłosienia za pomocą luksusowych, aromatycznych wosków twardych WaXx.me. Zabiegi gwarantują idealną gładkość bez podrażnień</p><br>
+							<h3 class="naglowek-kategorii">💆‍♀️ Twarz</h3>
+							<ul class="lista-uslug">
+								
+								<li><strong>Wąsik</strong><p class="price"><strong>⏱️ czas: 10 min.<br>cena: 40 zł</strong></p></li>
+								<li><strong>Uszy</strong><p class="price"><strong>⏱️ czas: 10 min.<br>cena: 40 zł</strong></p></li>
+								<li><strong>Pakiet Twarz (Wąsik + Uszy)</strong><p class="price"><strong>⏱️ czas: 20 min.<br>cena: 75 zł</strong></p></li>
+								</ul>
+
+							<h3 class="naglowek-kategorii">🦵 Ciało</h3>
+							<ul class="lista-uslug">
+								
+								<li><strong>Ręce (przedramiona)</strong><p class="price"><strong>⏱️ czas: 20 min.<br>cena: 40 zł</strong></p></li>
+								<li><strong>Całe ręce</strong><p class="price"><strong>⏱️ czas: 30 min.<br>cena: 60 zł</strong></p></li>
+								<li><strong>Nogi (łydki z kolanami)</strong><p class="price"><strong>⏱️ czas: 25 min.<br>cena: 70 zł</strong></p></li>
+								<li><strong>Całe nogi</strong><p class="price"><strong>⏱️ czas: 45 min.<br>cena: 90 zł</strong></p></li>
+							
+								</ul>
+
+							<h3 class="naglowek-kategorii">🎁 Gładkie Pakiety Łączone</h3>
+							<ul class="lista-uslug">
+								
+								<li><strong>Gładkie Nogi (Całe) + Całe Ręce</strong><p class="price"><strong>cena: 140 zł</strong></p></li>
+								<li><strong>Gładkie Nogi (Łydki) + Przedramiona</strong><p class="price"><strong>cena: 110 zł</strong></p></li>								
+							
+								</ul>	
+							
+						</div>
+
+
+
+						<div class="kategoria-rytualow">
+							<h2 class="naglowek-kategorii">💄 Profesjonalny Wizaż & Makijaż Okolicznościowy</h2>
+							<p>Trwałe makijaże wykonywane kosmetykami premium. Każda usługa obejmuje profesjonalne przygotowanie cery pod makijaż oraz aplikację kępek rzęs.</p>
+							<ul class="lista-uslug">
+								<li><strong>Makijaż ślubny</strong><p>    * Wyjątkowy, ultra-trwały wizaż perfekcyjnie dopasowany do Twojej urody i stylizacji ślubnej.</p><p class="price"><strong>cena: 250 zł</strong></p></li>
+								<li><strong>Próbny makijaż ślubny</strong><p>    * Szczegółowa konsultacja, dobór kolorystyki i pełny test makijażu przed tym najważniejszym dniem.</p><p class="price"><strong>cena: 200 zł</strong></p></li>
+								<li><strong>Makijaż Wieczorowy / Okolicznościowy</strong><p>    * Idealny wybór na wesele, bankiet, imprezę firmową lub wyjątkowe wyjście.</p><p class="price"><strong>cena: 220 zł</strong></p></li>
+								<li><strong>Makijaż do Sesji Zdjęciowej</strong><p>    * Specjalistyczny makijaż fotograficzny, odporny na mocne światło błyskowe flash.</p><p class="price"><strong>cena: 220 zł</strong></p></li>	
+
+						
 							</ul>
 						</div>
 
-						<div class="kategoria-rytualow">
-							<h2 class="naglowek-kategorii">Kosmetologia Aparaturowa <span class="podpis-kategorii">(Naturalne wsparcie technologiczne)</span></h2>
-							<ul class="lista-uslug">
-								<li><strong>Kawitacja</strong><p>Bezdotykowe i całkowicie bezbolesne odświeżenie skóry za pomocą fali ultradźwiękowej. Mikroskopijne pęcherzyki delikatnie i skutecznie złuszczają martwy naskórek, pozostawiając cerę idealnie gładką i przygotowaną na przyjęcie składników odżywczych.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Sonoforeza</strong><p>Wprowadzanie drogocennych koktajli witaminowych w głębokie warstwy skóry za pomocą subtelnych mikrodrgań ultradźwiękowych. To bezinwazyjny sposób na maksymalne odżywienie i rozświetlenie cery od wewnątrz.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Oksybrazja</strong><p>Intensywny, chłodny powiew czystego odświeżenia. Zabieg polega na złuszczaniu naskórka za pomocą rozproszonego strumienia soli fizjologicznej i tlenu, co błyskawicznie dotlenia cerę, zmniejsza pory i daje spektakularny efekt rozjaśnienia.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Oczyszczanie wodorowe</strong><p>Wykorzystanie mikroskopijnych cząsteczek aktywnego wodoru do bezinwazyjnego wymiatania wolnych rodników i głębokich zanieczyszczeń. Zabieg skutecznie oczyszcza pory na poziomie komórkowym, hamując procesy starzenia i odświeżając zmęczoną skórę.</p><p class="price"><strong>cena: ---</strong></p></li>
-							</ul>
-						</div>
+
 
 						<div class="kategoria-rytualow">
-							<h2 class="naglowek-kategorii">Oprawa Oka & Depilacja</h2>
-							<ul class="lista-uslug">
-								<li><strong>Henna brwi i rzęs z regulacją</strong><p>Subtelna, naturalna stylizacja, która podkreśla głębię spojrzenia i definiuje architekturę twarzy. Geometryczna regulacja i dopasowany do Twojej urody kolor dają efekt schludnej elegancji bez konieczności codziennego makijażu.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Depilacja woskowa</strong><p>Klasyczna metoda na długotrwałe cieszenie się aksamitnie gładką skórą. Szybkie i precyzyjne usunięcie włosków wraz z cebulkami gwarantuje spokój na wiele tygodni i sprawia, że odrastające włoski są znacznie cieńsze i delikatniejsze.</p><p class="price"><strong>cena: ---</strong></p></li>
-							</ul>
-						</div>
-
-						<div class="kategoria-rytualow">
-							<h2 class="naglowek-kategorii">Makijaż <span class="podpis-kategorii">(Podkreślenie naturalnego piękna)</span></h2>
-							<ul class="lista-uslug">
-								<li><strong>Makijaż ślubny</strong><p>Tradycyjny, niezwykle świetlisty makijaż skrojony na miarę najważniejszego dnia w życiu. Łączy w sobie elegancję, odporność na emocje i idealną współpracę z obiektywem aparatu, eksponując Twoje najpiękniejsze rysy twarzy.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Makijaż wieczorowy</strong><p>Zmysłowa stylizacja dedykowana na wyjątkowe wyjścia. Dobieramy intensywność i charakter makijażu do klimatu wydarzenia, Twojej kreacji oraz światła, w jakim będziesz się prezentować, abyś czuła się pewnie i zjawiskowo.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Makijaż do sesji fotograficznych</strong><p>Specjalistyczna technika makijażu oparta na zaawansowanym modelowaniu światłocieniem. Tworzymy perfekcyjną, matowo-satynową strukturę skóry, która wygląda nieskazitelnie w wymagającym oświetleniu studyjnym i plenerowym.</p><p class="price"><strong>cena: ---</strong></p></li>
-							</ul>
-						</div>
-
-						<div class="kategoria-rytualow">
-							<h2 class="naglowek-kategorii">Manicure & Pedicure <span class="podpis-kategorii">(Minimalizm i detal w rytmie slow)</span></h2>
-							<ul class="lista-uslug">
-								<li><strong>Manicure klasyczny</strong><p>Tradycyjna, minimalistyczna pielęgnacja skupiona na zdrowiu i naturalnej estetyce dłoni. Obejmuje precyzyjne opracowanie skórek, nadanie idealnego kształtu paznokciom oraz odżywczą kąpiel i masaż dłoni.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Manicure japoński</strong><p>Rytuał głębokiej regeneracji dla zmęczonych i kruchych paznokci. Polega na wtarciu w płytkę odżywczej pasty z krzemionką z Morza Japońskiego i pyłkiem pszczelim, co nadaje im zdrowy, różowy połysk o sile czystego diamentu.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Manicure hybrydowy</strong><p>Połączenie nienagannej estetyki z bezkompromisową trwałością. Cienka, idealnie gładka warstwa elastycznego lakieru utwardzanego światłem chroni paznokcie i gwarantuje perfekcyjny kolor oraz blask nawet do trzech tygodni.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Manicure akrylo-żelowy</strong><p>Zaawansowana technika dedykowana wymagającej lub osłabionej płytce. Pozwala na bezpieczne utwardzenie, nadbudowanie lub przedłużenie paznokcia, dając naturalnie wyglądający, maksymalnie trwały i odporny na uszkodzenia efekt.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Pedicure klasyczny</strong><p>Przynoszący ulgę rytuał pielęgnacyjny, który przywraca stopom lekkość i nienaganny wygląd. Składa się z odświeżającej kąpieli, wygładzenia naskórka, precyzyjnego skrócenia paznokci oraz głęboko nawilżającego masażu.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Pedicure frezarkowy</strong><p>Nowoczesna i niezwykle bezpieczna pielęgnacja stóp przy użyciu specjalistycznego sprzętu. Pozwala na bezwysiłkowe, idealnie gładkie usunięcie zrogowaciałego naskórka z podeszwy stóp oraz perfekcyjne opracowanie wałów okołopaznokciowych.</p><p class="price"><strong>cena: ---</strong></p></li>
-								<li><strong>Pedicure hybrydowy</strong><p>Kompleksowy zabieg pielęgnacji stóp zwieńczony nałożeniem odpornego na ścieranie lakieru hybrydowego. To idealne rozwiązanie na letnie miesiące lub urlop, gwarantujące nienaganny blask i kolor bez odprysków przez wiele tygodni.</p><p class="price"><strong>cena: ---</strong></p></li>
-							</ul>
-						</div>
+							<h2 class="naglowek-kategorii">🛡️ Medyczny Standard Higieny</h2>
+							<p>Wszystkie narzędzia wielorazowe (cążki, pęsety, kopytka) po każdym zabiegu są dezynfekowane i sterylizowane w certyfikowanym autoklawie medycznym klasy B. Sterylne pakiety otwieramy wyłącznie przy Tobie, gwarantując 100% bezpieczeństwa i ochrony zdrowia.</p>
+								
+										
+						</div>						
 
 					</section>
 				</article>
@@ -988,7 +1106,7 @@
 				document.addEventListener('mousemove',function(e){
 					px=(e.clientX/W-0.5)*16;
 					py=(e.clientY/H-0.5)*16;
-					document.querySelectorAll('#main .image.main img').forEach(function(img){
+					document.querySelectorAll('#main article:not(#about) .image.main img').forEach(function(img){
 						img.style.transform='translate('+px+'px,'+py+'px) scale(1.06)';
 					});
 				});
@@ -997,7 +1115,7 @@
 					if(e.gamma===null) return;
 					px=Math.max(-12,Math.min(12,e.gamma*0.3));
 					py=Math.max(-8, Math.min(8, (e.beta-30)*0.18));
-					document.querySelectorAll('#main .image.main img').forEach(function(img){
+					document.querySelectorAll('#main article:not(#about) .image.main img').forEach(function(img){
 						img.style.transform='translate('+px+'px,'+py+'px) scale(1.06)';
 					});
 				});
