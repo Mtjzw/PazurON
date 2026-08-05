@@ -21,7 +21,7 @@ const uslugi = {
   },
   makijaz: {
     cena: 250,
-    czas: 0
+    czas: 90
   }
 };
 
