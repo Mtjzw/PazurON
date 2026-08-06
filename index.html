@@ -71,9 +71,8 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
-			/* ============================================================
-			   CURSOR — desktop only
-			   ============================================================ */
+		
+
 			#cursor-glow, #cursor-dot { display: none; }
 			@media (pointer: fine) {
 				#cursor-glow {
@@ -108,9 +107,7 @@
 				}
 			}
 
-			/* ============================================================
-			   WEBGL CANVAS — full-screen shader background
-			   ============================================================ */
+
 			#gl-canvas {
 				position: fixed;
 				top: 0; left: 0;
@@ -120,9 +117,7 @@
 				opacity: 0.38;
 			}
 
-			/* ============================================================
-			   PARTICLES canvas — reduced on mobile
-			   ============================================================ */
+
 			#particles-canvas {
 				position: fixed;
 				top: 0; left: 0;
@@ -132,9 +127,7 @@
 				opacity: 0.5;
 			}
 
-			/* ============================================================
-			   LOGO 3D TILT
-			   ============================================================ */
+
 			#header .logo {
 				transition: transform 0.12s ease-out;
 				transform-style: preserve-3d;
@@ -149,9 +142,7 @@
 				transform: rotate(180deg) scale(1.18);
 			}
 
-			/* ============================================================
-			   NAV RIPPLE + MAGNETIC
-			   ============================================================ */
+
 			#header nav ul li a {
 				position: relative;
 				overflow: hidden;
@@ -180,9 +171,7 @@
 				width: 100%; left: 0;
 			}
 
-			/* ============================================================
-			   H1 SHIMMER
-			   ============================================================ */
+
 			#header .inner h1 {
 				background: linear-gradient(90deg,
 					#fff 0%, #fff 30%,
@@ -199,9 +188,7 @@
 				to   { background-position: -220% center; }
 			}
 
-			/* ============================================================
-			   ARTICLE REVEAL
-			   ============================================================ */
+
 			#main article {
 				animation: articleReveal 0.6s cubic-bezier(0.23,1,0.32,1) both;
 			}
@@ -210,9 +197,7 @@
 				to   { opacity:1; transform: translateY(0)   scale(1);    filter: blur(0); }
 			}
 
-			/* ============================================================
-			   IMAGE — parallax container
-			   ============================================================ */
+
 			.image.main {
 				overflow: hidden;
 				border-radius: 6px;
@@ -223,16 +208,14 @@
 				transition: transform 0.08s linear;
 			}
 
-			/* Menu rytuałów: nieruchomy obraz bez efektu drżenia */
+
 			#about .image.main img {
 				transform: scale(1.06) !important;
 				transition: none;
 				will-change: auto;
 			}
 
-			/* ============================================================
-			   SCROLL-REVEAL: sekcje wjeżdżają z dołu
-			   ============================================================ */
+
 			.sr-item {
 				opacity: 0;
 				transform: translateY(30px);
@@ -243,9 +226,7 @@
 				transform: translateY(0);
 			}
 
-			/* ============================================================
-			   LISTA USŁUG — staggered reveal
-			   ============================================================ */
+
 			.lista-uslug li {
 				opacity: 0;
 				transform: translateX(-20px);
@@ -256,9 +237,7 @@
 				transform: translateX(0);
 			}
 
-			/* ============================================================
-			   KATEGORIA HOVER GLOW
-			   ============================================================ */
+	
 			.kategoria-rytualow {
 				transition: box-shadow 0.3s ease;
 				border-radius: 8px;
@@ -268,9 +247,7 @@
 				box-shadow: 0 0 35px rgba(200,160,100,0.09);
 			}
 
-			/* ============================================================
-			   MAGNETIC BUTTONS — wrapper needed for effect
-			   ============================================================ */
+
 			.mag-wrap {
 				display: inline-block;
 				position: relative;
@@ -283,14 +260,11 @@
 			}
 			input[type="submit"].primary:active { transform: scale(0.97); }
 
-			/* ============================================================
-			   TEXT SCRAMBLE — stosowany przez JS
-			   ============================================================ */
+	
+			   
 			.scramble-target { display: inline; }
 
-			/* ============================================================
-			   SCROLL MORPHING — płynne przejście kategorii
-			   ============================================================ */
+		
 			.kategoria-rytualow {
 				transition: box-shadow 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
 			}
@@ -300,9 +274,7 @@
 				transform: none;
 			}
 
-			/* ============================================================
-			   FOOTER ICONS
-			   ============================================================ */
+
 			#footer .icons li a {
 				transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), color 0.25s;
 				display: inline-block;
@@ -310,9 +282,6 @@
 			#footer .icons li a:hover  { transform: translateY(-6px) scale(1.2); }
 			#footer .icons li a:active { transform: scale(0.95); }
 
-			/* ============================================================
-			   TAP SPLASH canvas
-			   ============================================================ */
 			#splash-canvas {
 				position: fixed;
 				top: 0; left: 0;
@@ -321,9 +290,7 @@
 				z-index: 9998;
 			}
 
-			/* ============================================================
-			   GYRO INDICATOR (mobile only)
-			   ============================================================ */
+
 			#gyro-hint {
 				display: none;
 				position: fixed;
@@ -354,26 +321,25 @@
 	</head>
 	<body class="is-preload">
 
-		<!-- Cursor effects (desktop) -->
+
 		<div id="cursor-glow"></div>
 		<div id="cursor-dot"></div>
 
-		<!-- WebGL shader background -->
+
 		<canvas id="gl-canvas"></canvas>
 
-		<!-- Particles canvas -->
+
 		<canvas id="particles-canvas"></canvas>
 
-		<!-- Tap splash canvas (mobile) -->
+
 		<canvas id="splash-canvas"></canvas>
 
-		<!-- Gyro hint (mobile) -->
+
 		<div id="gyro-hint">✦ nakieruj telefon</div>
 
-		<!-- Wrapper -->
+
 		<div id="wrapper">
 
-			<!-- Header -->
 			<header id="header">
 				<div class="logo" id="logo-tilt">
 					<span class="icon solid fa-yin-yang"></span>
@@ -394,10 +360,10 @@
 				</nav>
 			</header>
 
-			<!-- Main -->
+
 			<div id="main">
 
-				<!-- O Mnie -->
+
 				<article id="intro">
 					<h2 class="major">Filozofia</h2>
 					<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
@@ -405,7 +371,7 @@
 					<p>Współczesny świat proponuje zamrażanie mimiki i sterylne gabinety. Ja wybrałam inną drogę, zakorzenioną w soft minimaliźmie. Tworzę przestrzeń, gdzie uwalniam napięcia skumulowane w mięśniach twarzy i karku. Niektórzy nazywają to neurokosmetyką, czyli poszukiwaniem ukojenia dla przebodźcowanego układu nerwowego poprzez zabiegi self-care. Wiem, że skóra i układ nerwowy to jedność i nie walczę z upływającym czasem – za pomocą autorskich masaży i naturalnej kosmetologii przywracam skórze jej naturalną zdolność do regeneracji, blasku i uniesienia rysów. Twoja twarz nie potrzebuje korekty. Potrzebuje uwagi.</p>
 				</article>
 
-				<!-- Sprzęt -->
+
 				<article id="work">
 					<h2 class="major">Jak działam</h2>
 					<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
@@ -414,7 +380,7 @@
 					<p><b>2.&nbsp;&nbsp;Dopełnienie (Dłonie &amp; Stopy): </b>Dopełnieniem relaksu jest precyzyjny, minimalistyczny manicure i pedicure. Dbam o detale w atmosferze, która pozwala Ci po prostu na godzinę zniknąć dla świata.</p>
 				</article>
 
-				<!-- Usługi -->
+
 				<article id="about">
 					<h2 class="major">Menu rytuałów</h2>
 					<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
@@ -604,7 +570,7 @@
 					</section>
 				</article>
 
-				<!-- Contact -->
+
 				<article id="contact">
 					<h2 class="major">Umów się</h2>
 
@@ -651,7 +617,7 @@
 					</div>
 
 					<ul class="icons" style="margin-top:2rem;">
-						<li><a href="https://booksy.com/widget/code.js?id=355173&country=pl&lang=pl" rel="noopener noreferrer" class="icon solid fa-calendar-alt" target="_blank"><span class="label">Booksy</span></a></li>
+						<li><a href="https://pazuronzmarszczkaoff.booksy.com/a/" rel="noopener noreferrer" class="icon solid fa-calendar-alt" target="_blank"><span class="label">Booksy</span></a></li>
 						<li><a href="https://facebook.com/profile.php?id=61590422836386" rel="noopener noreferrer" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
 						<li><a href="https://www.instagram.com/pazuron.zmarszczkaoff/" rel="noopener noreferrer" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
 						<li><a href="https://tiktok.com/@zmarszczkaoff" rel="noopener noreferrer" class="icon brands fa-tiktok" target="_blank"><span class="label">Tik-Tok</span></a></li>
@@ -660,10 +626,10 @@
 
 			</div>
 
-			<!-- Footer -->
+
 			<footer id="footer">
 				<ul class="icons" style="margin-bottom:1.5rem;">
-					<li><a href="https://booksy.com/pl-pl/dl/show-business/ID_TWOJEGO_SALONU" rel="noopener noreferrer" class="icon solid fa-calendar-alt" target="_blank"><span class="label">Booksy</span></a></li>
+					<li><a href="https://pazuronzmarszczkaoff.booksy.com/a/" rel="noopener noreferrer" class="icon solid fa-calendar-alt" target="_blank"><span class="label">Booksy</span></a></li>
 					<li><a href="https://facebook.com/profile.php?id=61590422836386" rel="noopener noreferrer" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
 					<li><a href="https://www.instagram.com/pazuron.zmarszczkaoff/" rel="noopener noreferrer" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
 					<li><a href="https://tiktok.com/@zmarszczkaoff" rel="noopener noreferrer" class="icon brands fa-tiktok" target="_blank"><span class="label">Tik-Tok</span></a></li>
@@ -703,33 +669,28 @@
 
 		</div>
 
-		<!-- BG -->
+
 		<div id="bg"></div>
 
-		<!-- Scripts -->
+
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/browser.min.js"></script>
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 
-		<!-- WOW Effects v3 -->
+
 		<script>
 		(function(){
 		'use strict';
 
-		/* ============================================================
-		   UTILS
-		   ============================================================ */
+
 		var RM   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		var isMobile = window.matchMedia('(pointer: coarse)').matches;
 		var W = window.innerWidth, H = window.innerHeight;
 		window.addEventListener('resize', function(){ W = window.innerWidth; H = window.innerHeight; });
 
-		/* ============================================================
-		   1. WEBGL SHADER BACKGROUND
-		      Płynna, organiczna animacja reagująca na mysz/gyro
-		   ============================================================ */
+
 		(function(){
 			if (RM) return;
 			var canvas = document.getElementById('gl-canvas');
@@ -797,13 +758,13 @@
 			}
 			requestAnimationFrame(draw);
 
-			// Desktop: mouse drives shader
+
 			document.addEventListener('mousemove', function(e){
 				ux = e.clientX / W;
 				uy = e.clientY / H;
 			});
 
-			// Mobile: gyroscope drives shader (also used for logo tilt)
+
 			window.addEventListener('deviceorientation', function(e){
 				if (e.beta===null) return;
 				ux = Math.min(1, Math.max(0, (e.gamma + 45) / 90));
@@ -811,9 +772,7 @@
 			});
 		})();
 
-		/* ============================================================
-		   2. PARTICLES — adaptive (fewer on mobile, no repel on touch)
-		   ============================================================ */
+
 		(function(){
 			if (RM) return;
 			var canvas = document.getElementById('particles-canvas');
@@ -868,9 +827,7 @@
 			draw();
 		})();
 
-		/* ============================================================
-		   3. TAP SPLASH — mobile touch creates burst of particles
-		   ============================================================ */
+	
 		(function(){
 			var canvas = document.getElementById('splash-canvas');
 			var ctx    = canvas.getContext('2d');
@@ -922,7 +879,7 @@
 				}
 			},{passive:true});
 
-			// Also on mouse click for desktop
+
 			document.addEventListener('click',function(e){
 				if(RM||isMobile) return;
 				bursts.push(new Burst(e.clientX,e.clientY));
@@ -940,9 +897,7 @@
 			draw();
 		})();
 
-		/* ============================================================
-		   4. CURSOR GLOW + DOT — desktop only
-		   ============================================================ */
+	
 		(function(){
 			if(RM||isMobile) return;
 			var glow=document.getElementById('cursor-glow');
@@ -965,16 +920,13 @@
 			});
 		})();
 
-		/* ============================================================
-		   5. LOGO 3D TILT
-		      Desktop: mouse position | Mobile: gyroscope
-		   ============================================================ */
+
 		(function(){
 			if(RM) return;
 			var logo=document.getElementById('logo-tilt');
 			if(!logo) return;
 
-			// Desktop
+
 			if(!isMobile){
 				document.addEventListener('mousemove',function(e){
 					var r=logo.getBoundingClientRect();
@@ -983,7 +935,7 @@
 					logo.style.transform='perspective(280px) rotateY('+(dx*26)+'deg) rotateX('+(-dy*26)+'deg) scale(1.1)';
 				});
 			}
-			// Mobile: gyro
+
 			var gyroBeta=0, gyroGamma=0;
 			window.addEventListener('deviceorientation',function(e){
 				if(e.beta===null) return;
@@ -993,10 +945,7 @@
 			});
 		})();
 
-		/* ============================================================
-		   6. MAGNETIC BUTTONS — desktop only
-		      Przyciski przyciągają kursor z odległości 80px
-		   ============================================================ */
+
 		(function(){
 			if(RM||isMobile) return;
 			var RANGE=80, STRENGTH=0.38;
@@ -1018,9 +967,7 @@
 			});
 		})();
 
-		/* ============================================================
-		   7. TEXT SCRAMBLE — hover na nagłówkach kategorii
-		   ============================================================ */
+
 		(function(){
 			if(RM) return;
 			var CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
@@ -1045,11 +992,11 @@
 			}
 
 			document.querySelectorAll('.naglowek-kategorii').forEach(function(el){
-				// Pobierz główny tekst nagłówka, bez tekstu w elemencie <span>
+
 				var mainText=el.childNodes[0];
 				if(!mainText||mainText.nodeType!==3) return;
 
-				// Oryginał zapisujemy tylko raz — zanim zacznie się animacja
+
 				var originalText=mainText.textContent;
 
 				el.addEventListener('mouseenter',function(){
@@ -1075,14 +1022,14 @@
 					},38);
 				});
 
-				// Po zejściu kursorem natychmiast przywróć poprawny tekst
+
 				el.addEventListener('mouseleave',function(){
 					clearInterval(el._sci);
 					mainText.textContent=originalText;
 				});
 			});
 
-			// Also on H2.major when article opens
+
 			document.addEventListener('click',function(){
 				setTimeout(function(){
 					document.querySelectorAll('#main article:not([style*="display: none"]) h2.major').forEach(function(el){
@@ -1095,9 +1042,7 @@
 			});
 		})();
 
-		/* ============================================================
-		   8. SCROLL-DRIVEN MORPHING — kategorie wjeżdżają sekwencyjnie
-		   ============================================================ */
+	
 		(function(){
 			if(RM) return;
 			var io=new IntersectionObserver(function(entries){
@@ -1117,7 +1062,7 @@
 				io.observe(el);
 			});
 
-			// Generic scroll-reveal for other elements
+
 			var ioSR=new IntersectionObserver(function(entries){
 				entries.forEach(function(e){
 					if(e.isIntersecting){ e.target.classList.add('sr-visible'); ioSR.unobserve(e.target); }
@@ -1130,9 +1075,7 @@
 			});
 		})();
 
-		/* ============================================================
-		   9. STAGGER REVEAL — lista usług
-		   ============================================================ */
+
 		(function(){
 			if(RM) return;
 			var io=new IntersectionObserver(function(entries){
@@ -1148,7 +1091,7 @@
 			},{threshold:0.05});
 			document.querySelectorAll('.lista-uslug').forEach(function(ul){ io.observe(ul); });
 
-			// Also re-trigger on article open
+
 			document.addEventListener('click',function(){
 				setTimeout(function(){
 					document.querySelectorAll('.lista-uslug').forEach(function(ul){
@@ -1163,9 +1106,6 @@
 			});
 		})();
 
-		/* ============================================================
-		   10. NAV RIPPLE
-		   ============================================================ */
 		document.querySelectorAll('#header nav ul li a').forEach(function(link){
 			link.addEventListener('click',function(e){
 				var ripple=document.createElement('span');
@@ -1178,9 +1118,7 @@
 			});
 		});
 
-		/* ============================================================
-		   11. IMAGE PARALLAX — mouse on desktop, gyro on mobile
-		   ============================================================ */
+	
 		(function(){
 			if(RM) return;
 			var px=0,py=0;
@@ -1204,9 +1142,7 @@
 			}
 		})();
 
-		/* ============================================================
-		   12. CONTACT FORM AJAX
-		   ============================================================ */
+
 		(function(){
 			var form=document.getElementById('contactForm');
 			if(!form) return;
